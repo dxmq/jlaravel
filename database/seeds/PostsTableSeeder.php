@@ -16,6 +16,8 @@ class PostsTableSeeder extends Seeder
         DB::table('posts')->insert([
             'title' => 'jlaravel自由文章创作',
             'content' => 'welcome, jlaravel, 简单, 优雅！',
+            'created_at' => strtotime(time()),
+            'updated_at' => strtotime(time()),
         ]);
     }
 }
