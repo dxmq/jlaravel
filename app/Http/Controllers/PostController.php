@@ -36,8 +36,7 @@ class PostController extends Controller
     public function update(PostUpdate $post_up, $id)
     {
         $post = Post::findOrFail($id);
-        $post->title = $post_up->get('title');
-        $post->content = $post_up->get('content');
+        $post->fill($post_up->postFillData());
         $post->save();
 
         return redirect('/');

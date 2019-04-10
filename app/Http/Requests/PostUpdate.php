@@ -12,4 +12,12 @@ class PostUpdate extends PostCreate
             'content' => 'required'
         ];
     }
+
+    public function postFillData()
+    {
+        return [
+            'title' => $this->get('title'),
+            'content' => $this->get('content'),
+        ];
+    }
 }

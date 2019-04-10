@@ -24,5 +24,16 @@
 
 @section('js')
     <script type="text/javascript" src="{{ asset('js/wangEditor.min.js') }}"></script>
-    <script src="{{ asset('js/jlaravel.js') }}"></script>
+    <script>
+    var editor = new wangEditor('content');
+    /*
+
+    // 设置 headers
+    editor.config.uploadHeaders = {
+    'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+    };
+    */
+
+    editor.create();
+    </script>
 @endsection
