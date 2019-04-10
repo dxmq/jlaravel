@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class PostCreate extends FormRequest
 {
@@ -34,6 +35,16 @@ class PostCreate extends FormRequest
         return [
             'title' => '标题',
             'content' => '内容',
+        ];
+    }
+
+    // 返回表单数据
+    public function postFillData()
+    {
+        return [
+            'title' => $this->get('title'),
+            'content' => $this->get('content'),
+            'user_id' => Auth::id(),
         ];
     }
 }

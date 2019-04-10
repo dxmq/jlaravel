@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostCreate;
 use App\Http\Requests\PostUpdate;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -21,7 +22,7 @@ class PostController extends Controller
 
     public function store(PostCreate $post)
     {
-        Post::create($post->only('title', 'content'));
+        Post::create($post->postFillData());
 
         return redirect('/');
     }

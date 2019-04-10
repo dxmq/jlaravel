@@ -24,4 +24,10 @@ class LoginController extends Controller
 
         return back()->withErrors('用户名或密码错误');
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/login');
+    }
 }

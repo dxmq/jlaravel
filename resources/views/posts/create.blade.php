@@ -21,3 +21,8 @@
 
     </div>
 @endsection
+
+@section('js')
+    <script type="text/javascript" src="{{ asset('js/wangEditor.min.js') }}"></script>
+    <script src="{{ asset('js/jlaravel.js') }}"></script>
+@endsection

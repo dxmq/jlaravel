@@ -11,18 +11,20 @@
 |
 */
 
-Route::get('/', 'IndexController@index');
+Route::group(['middleware' => 'auth:web'], function () {
+    Route::get('/', 'IndexController@index');
+    Route::get('/posts/create', 'PostController@create');
+    Route::get('/posts/{post}', 'PostController@show');
+    Route::get('/posts/{post}/edit', 'PostController@edit');
+    Route::get('/posts/{post}/delete', 'PostController@delete');
+    Route::post('/posts/image/upload', 'PostController@image');
+    Route::post('/posts', 'PostController@store');
+    Route::post('/posts/{post}', 'PostController@update');
+});
+
 
 Route::get('/login', 'LoginController@index');
 Route::post('/login', 'LoginController@login');
+Route::get('/logout', 'LoginController@logout');
 Route::get('/register', 'RegisterController@index');
 Route::post('/register', 'RegisterController@register');
-
-Route::get('/posts/create', 'PostController@create');
-Route::get('/posts/{post}', 'PostController@show');
-Route::get('/posts/{post}/edit', 'PostController@edit');
-Route::get('/posts/{post}/delete', 'PostController@delete');
-Route::post('/posts/image/upload', 'PostController@image');
-Route::post('/posts', 'PostController@store');
-Route::post('/posts/{post}', 'PostController@update');
-
