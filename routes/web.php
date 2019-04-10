@@ -13,6 +13,11 @@
 
 Route::get('/', 'IndexController@index');
 
+Route::get('/login', 'LoginController@index');
+Route::post('/login', 'LoginController@login');
+Route::get('/register', 'RegisterController@index');
+Route::post('/register', 'RegisterController@register');
+
 Route::get('/posts/create', 'PostController@create');
 Route::get('/posts/{post}', 'PostController@show');
 Route::get('/posts/{post}/edit', 'PostController@edit');
