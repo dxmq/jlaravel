@@ -19,7 +19,9 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::get('/posts/{post}/delete', 'PostController@delete');
     Route::post('/posts/image/upload', 'PostController@image');
     Route::post('/posts', 'PostController@store');
+    Route::post('/posts/comment', 'PostController@comment');
     Route::post('/posts/{post}', 'PostController@update');
+
 });
 
 

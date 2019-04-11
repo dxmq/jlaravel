@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentCreate;
 use App\Http\Requests\PostCreate;
 use App\Http\Requests\PostUpdate;
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,7 +14,7 @@ class PostController extends Controller
 
     public function show($id)
     {
-        $post = Post::with('user')->findOrFail($id);
+        $post = Post::with(['user', 'comments'])->findOrFail($id);
         return view('posts.show', compact('post'));
     }
 
@@ -60,5 +62,11 @@ class PostController extends Controller
     public function image()
     {
 
+    }
+
+    public function comment(CommentCreate $commentCreate)
+    {
+        Comment::create($commentCreate->postFillData());
+        return back()->with('success', '评论成功');
     }
 }
