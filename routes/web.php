@@ -11,10 +11,10 @@
 |
 */
 
+Route::get('/', 'IndexController@index');
+Route::get('/posts/{post}/show', 'PostController@show');
 Route::group(['middleware' => 'auth:web'], function () {
-    Route::get('/', 'IndexController@index');
     Route::get('/posts/create', 'PostController@create');
-    Route::get('/posts/{post}', 'PostController@show');
     Route::get('/posts/{post}/edit', 'PostController@edit');
     Route::get('/posts/{post}/delete', 'PostController@delete');
     Route::post('/posts/image/upload', 'PostController@image');
@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth:web'], function () {
 });
 
 
-Route::get('/login', 'LoginController@index');
+Route::get('/login', 'LoginController@index')->name('login');
 Route::post('/login', 'LoginController@login');
 Route::get('/logout', 'LoginController@logout');
 Route::get('/register', 'RegisterController@index');

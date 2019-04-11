@@ -20,6 +20,7 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
+                @if (!Auth::guest())
                 <div>
                     <img src="" alt="" class="img-rounded" style="border-radius:500px; height: 30px">
                     <a href="#" class="blog-nav-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}  <span class="caret"></span></a>
@@ -29,6 +30,18 @@
                         <li><a href="/logout">登出</a></li>
                     </ul>
                 </div>
+                @else
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a class="blog-nav-item " href="{{ url('/login') }}">登录</a>
+                        </li>
+                        <li style="margin-right: 15px;">
+                            <a class="blog-nav-item " href="{{ url('/register') }}">注册</a>
+                        </li>
+                    </ul>
+                </div>
+                @endif
             </li>
         </ul>
     </div>
