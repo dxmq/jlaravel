@@ -24,7 +24,7 @@
             <p>{!! $post->content !!}</p><p><br>
             </p>
             <div>
-                <a href="/posts/62/zan" type="button" class="btn btn-primary btn-lg">赞</a>
+                <a href="/posts/{{ $post->id }}/zan" type="button" class="btn btn-primary btn-lg">赞</a>
 
             </div>
         </div>

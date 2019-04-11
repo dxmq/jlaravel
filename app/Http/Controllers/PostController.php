@@ -7,6 +7,7 @@ use App\Http\Requests\PostCreate;
 use App\Http\Requests\PostUpdate;
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\Zan;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -68,5 +69,19 @@ class PostController extends Controller
     {
         Comment::create($commentCreate->postFillData());
         return back()->with('success', '评论成功');
+    }
+
+    public function zan(Post $post)
+    {
+        $zan = new Zan();
+        $zan->user_id = Auth::id();
+        $post->zans()->save($zan);
+        return back();
+    }
+
+    public function unzan(Post $post)
+    {
+        $post->zan(Auth::id())->delete();
+        return back();
     }
 }

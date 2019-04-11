@@ -14,6 +14,7 @@
 Route::get('/', 'IndexController@index');
 Route::get('/posts/{post}/show', 'PostController@show');
 Route::group(['middleware' => 'auth:web'], function () {
+    // 文章相关
     Route::get('/posts/create', 'PostController@create');
     Route::get('/posts/{post}/edit', 'PostController@edit');
     Route::get('/posts/{post}/delete', 'PostController@delete');
@@ -21,7 +22,11 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::post('/posts', 'PostController@store');
     Route::post('/posts/comment', 'PostController@comment');
     Route::post('/posts/{post}', 'PostController@update');
+    Route::get('/posts/{post}/zan', 'PostController@zan');
+    Route::get('/posts/{post}/unzan', 'PostController@unzan');
 
+    // 个人中心
+    Route::get('/user/{user}', 'UserController@index');
 });
 
 
