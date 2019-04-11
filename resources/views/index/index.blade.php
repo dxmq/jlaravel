@@ -37,7 +37,7 @@
     <div>
         @foreach ($posts as $post)
         <div class="blog-post">
-            <h2 class="blog-post-title"><a href="/posts/{{$post->id}}/show" >{{ $post->title }}</a></h2>
+            <h3 class="blog-post-title"><a href="/posts/{{$post->id}}/show" >{{ $post->title }}</a></h3>
             <p class="blog-post-meta">@isset($post->created_at){{ $post->created_at->toFormattedDateString() }} by @endisset<a href="/user/5">{{ $post->user->name }}</a></p>
 
             <p>{!! str_limit($post->content, 100, '...') !!}</p>

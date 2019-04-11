@@ -8,6 +8,7 @@ use App\Http\Requests\PostUpdate;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Zan;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -33,16 +34,17 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        $this->authorize('update', Post::class);
+        $this->authorize('update', $post);
         return view('posts.edit', compact('post'));
     }
 
 
     public function update(PostUpdate $post_up, $id)
     {
-        $this->authorize('update', Post::class);
-
         $post = Post::findOrFail($id);
+
+        $this->authorize('update',$post);
+
         $post->fill($post_up->postFillData());
         $post->save();
 
@@ -51,11 +53,11 @@ class PostController extends Controller
 
     public function delete($id)
     {
-        $this->authorize('delete', Post::class);
-
         $post = Post::findOrFail($id);
-        $post->delete();
 
+        $this->authorize('delete', $post);
+
+        $post->delete();
         return redirect('/');
     }
 
