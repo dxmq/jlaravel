@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'IndexController@index');
+Route::get('/search', 'IndexController@search');
 Route::get('/posts/{post}/show', 'PostController@show');
 Route::group(['middleware' => 'auth:web'], function () {
     // 文章相关

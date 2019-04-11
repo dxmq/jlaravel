@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use function Sodium\compare;
 
 class IndexController extends Controller
 {
@@ -15,4 +16,14 @@ class IndexController extends Controller
         return view('index.index', compact('posts'));
     }
 
+    public function search(Post $post)
+    {
+        $query = \request('query');
+        if (empty($query)) {
+            return redirect('/');
+        }
+
+        $posts = $post->where('title', 'like', "%{$query}%")->with('user')->paginate(config('jlaravel.search_per_page'));
+        return view('index.search', compact('query', 'posts'));
+    }
 }
