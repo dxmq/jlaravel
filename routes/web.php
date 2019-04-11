@@ -27,6 +27,8 @@ Route::group(['middleware' => 'auth:web'], function () {
 
     // 个人中心
     Route::get('/user/{user}', 'UserController@index');
+    Route::post('user/{user}/fan', 'UserController@fan');
+    Route::post('user/{user}/unfan', 'UserController@unfan');
 });
 
 

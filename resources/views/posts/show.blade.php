@@ -20,7 +20,7 @@
                 @endcan
             </div>
 
-            <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }} by <a href="#">{{ $post->user->name }} </a></p>
+            <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }} by <a href="/user/{{ $post->user->id }}">{{ $post->user->name }} </a></p>
 
             <p>
             <p>{!! $post->content !!}</p><p><br>
@@ -45,7 +45,7 @@
             <ul class="list-group">
                 @foreach ($post->comments as $comment)
                 <li class="list-group-item">
-                    <h5>{{ $comment->created_at->format('Y-m-d H:i:s') }} by {{ $comment->user->name }}</h5>
+                    <h5>{{ $comment->created_at->format('Y-m-d H:i:s') }} by <a href="/user/{{ $comment->user_id }}">{{ $comment->user->name }}</a></h5>
                     <div>
                         <h4>{{ $comment->content }}</h4>
                     </div>

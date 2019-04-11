@@ -5,11 +5,11 @@
 @section('content')
     <div class="col-sm-8">
         <blockquote>
-            <p><img src="/image/user.jpeg" alt="" class="img-rounded" style="border-radius:500px; height: 40px"> Kassandra Ankunding2
+            <p><img src="/image/user.jpeg" alt="" class="img-rounded" style="border-radius:500px; height: 40px"> {{ $user->name }}
             </p>
+            <footer>关注：{{ $user->stars_count }}｜粉丝：{{ $user->fans_count }}｜文章：{{ $user->posts_count }}</footer>
 
-
-            <footer>关注：4｜粉丝：0｜文章：9</footer>
+            @include('partials._user_like', ['target_user' => $user])
         </blockquote>
     </div>
     <div class="col-sm-8 blog-main">
@@ -21,35 +21,37 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">
+                    @foreach ($posts as $post)
                     <div class="blog-post" style="margin-top: 30px">
-                        <p class=""><a href="/user/5">Kassandra Ankunding2</a> 6天前</p>
-                        <p class=""><a href="/posts/62" >你好你好</a></p>
+                        <p class=""><a href="/user/{{ $post->user_id }}">{{ $post->user->name }}</a> {{ $post->created_at->diffForHumans() }}</p>
+                        <p class=""><a href="/posts/{{ $post->user_id }}" >{{ $post->title }}</a></p>
 
 
-                        <p><p>你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好...</p>
+                        <p><p>{!! str_limit($post->content, 100, '...') !!}</p>
                     </div>
-                    <div class="blog-post" style="margin-top: 30px">
-                        <p class=""><a href="/user/5">Kassandra Ankunding2</a> 6天前</p>
-                        <p class=""><a href="/posts/61" >你好你好</a></p>
-
-
-                        <p><p>你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好...</p>
-                    </div>
+                    @endforeach
                 </div>
                 <!-- /.tab-pane -->
+                @foreach ($stars as $star)
                 <div class="tab-pane" id="tab_2">
+                    <div class="blog-post" style="margin-top: 30px">
+                        <p class=""></p>
+                        <p class="">关注：1 | 粉丝：1｜ 文章：0</p>
+
+                       @include('partials._user_like', ['target_user' => $suser])
+
+                    </div>
+                </div>
+                @endforeach
+                <!-- /.tab-pane -->
+                <div class="tab-pane" id="tab_3">
                     <div class="blog-post" style="margin-top: 30px">
                         <p class="">Jadyn Medhurst Jr.</p>
                         <p class="">关注：1 | 粉丝：1｜ 文章：0</p>
 
-                        <div>
-                            <button class="btn btn-default like-button" like-value="1" like-user="6" _token="MESUY3topeHgvFqsy9EcM916UWQq6khiGHM91wHy" type="button">取消关注</button>
-                        </div>
+                        @include('partials._user_like', ['target_user' => $suser])
 
                     </div>
-                </div>
-                <!-- /.tab-pane -->
-                <div class="tab-pane" id="tab_3">
                 </div>
                 <!-- /.tab-pane -->
             </div>
