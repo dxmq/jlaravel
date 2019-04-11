@@ -1,6 +1,6 @@
 @extends('layouts._base')
 
-@section('title', '个人主页')
+@section('title', $user->name. ' 用户中心')
 
 @section('content')
     <div class="col-sm-8">
@@ -32,26 +32,28 @@
                     @endforeach
                 </div>
                 <!-- /.tab-pane -->
-                @foreach ($stars as $star)
                 <div class="tab-pane" id="tab_2">
+                    @foreach ($stars as $star)
                     <div class="blog-post" style="margin-top: 30px">
-                        <p class=""></p>
-                        <p class="">关注：1 | 粉丝：1｜ 文章：0</p>
+                        <p class="">{{ $star->suser->name }}</p>
+                        <p class="">关注：{{ $star->suser->stars->count()}} | 粉丝：{{ $star->suser->fans->count() }}｜ 文章：{{ $star->suser->posts->count() }}</p>
 
-                       @include('partials._user_like', ['target_user' => $suser])
+                       @include('partials._user_like', ['target_user' => $star->suser])
 
                     </div>
+                    @endforeach
                 </div>
-                @endforeach
                 <!-- /.tab-pane -->
                 <div class="tab-pane" id="tab_3">
+                    @foreach ($fans as $fan)
                     <div class="blog-post" style="margin-top: 30px">
-                        <p class="">Jadyn Medhurst Jr.</p>
-                        <p class="">关注：1 | 粉丝：1｜ 文章：0</p>
+                        <p class="">{{ $fan->fuser->name }}</p>
+                        <p class="">关注：{{ $fan->fuser->stars->count()}} | 粉丝：{{ $fan->fuser->fans->count() }}｜ 文章：{{ $fan->fuser->posts->count() }}</p>
 
-                        @include('partials._user_like', ['target_user' => $suser])
+                        @include('partials._user_like', ['target_user' => $fan->fuser])
 
                     </div>
+                    @endforeach
                 </div>
                 <!-- /.tab-pane -->
             </div>

@@ -47,7 +47,7 @@ class User extends Authenticatable
 
     public function hasFan($user_id)
     {
-        return $this->fans()->where('user_id', $user_id)->count();
+        return $this->fans()->where('fan_id', $user_id)->count();
     }
 
     // 我关注(粉)的人
