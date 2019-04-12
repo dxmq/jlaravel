@@ -11,6 +11,10 @@ class LoginController extends Controller
 
     public function index()
     {
+        if(Auth::check()) {
+            return redirect($this->redirectTo);
+        }
+
         return view('login.index');
     }
 

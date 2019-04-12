@@ -42,3 +42,11 @@ Route::post('/login', 'LoginController@login');
 Route::get('/logout', 'LoginController@logout');
 Route::get('/register', 'RegisterController@index');
 Route::post('/register', 'RegisterController@register');
+
+// 后台
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/login', '\App\Admin\Controllers\LoginController@index');
+    Route::post('/login', '\App\Admin\Controllers\LoginController@Login');
+
+    Route::get('/index', '\App\Admin\Controllers\IndexController@index');
+});
