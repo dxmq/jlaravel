@@ -45,8 +45,19 @@ Route::post('/register', 'RegisterController@register');
 
 // 后台
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/login', '\App\Admin\Controllers\LoginController@index');
-    Route::post('/login', '\App\Admin\Controllers\LoginController@Login');
+    Route::get('/login', '\App\Admin\Controllers\LoginController@index')->name('admin.login');
+    Route::post('/login', '\App\Admin\Controllers\LoginController@login');
 
-    Route::get('/index', '\App\Admin\Controllers\IndexController@index');
+    Route::group(['middleware' => 'admin'], function () {
+        Route::get('/index', '\App\Admin\Controllers\IndexController@index');
+        Route::get('/logout', '\App\Admin\Controllers\IndexController@logout');
+
+        // 用户相关
+        Route::get('/users', '\App\Admin\Controllers\UserController@index');
+        Route::get('/users/create', '\App\Admin\Controllers\UserController@create');
+        Route::get('/users/{user}/edit', '\App\Admin\Controllers\UserController@edit');
+        Route::post('/users/store', '\App\Admin\Controllers\UserController@store');
+        Route::post('/users/{user}', '\App\Admin\Controllers\UserController@update');
+        Route::get('/users/{user}/delete', '\App\Admin\Controllers\UserController@delete');
+    });
 });

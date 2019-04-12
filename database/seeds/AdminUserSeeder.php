@@ -2,9 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
-class PostsTableSeeder extends Seeder
+class AdminUserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,9 +12,9 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('posts')->insert([
-            'title' => 'jlaravel自由文章创作',
-            'content' => 'welcome, jlaravel, 简单, 优雅！',
+        DB::table('admin_users')->insert([
+            'name' => 'admin',
+            'password' => bcrypt('admin888'),
             'created_at' => date('Y-m-d H:i:s', time()),
             'updated_at' => date('Y-m-d H:i:s', time()),
         ]);

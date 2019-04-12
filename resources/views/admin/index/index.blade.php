@@ -1,5 +1,7 @@
 @extends('admin.layouts._base')
 
+@section('title', '后台首页')
+
 @section('content')
 <div class="content-wrapper">
 
