@@ -28,4 +28,14 @@ class Post extends Model
     {
         return $this->hasOne(Zan::class)->where('user_id', $user_id);
     }
+
+    public function topics()
+    {
+        return $this->belongsToMany(Topic::class, 'post_topics', 'post_id', 'topic_id')->withPivot('topic_id', 'post_id');
+    }
+
+    public function postTopics()
+    {
+        return $this->hasMany(PostTopic::class, 'post_id');
+    }
 }
