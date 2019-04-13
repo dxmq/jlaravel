@@ -19,5 +19,6 @@
 
 @include('admin.layouts._footer_js')
 
+@yield('js')
 </body>
 </html>

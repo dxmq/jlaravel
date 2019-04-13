@@ -27,4 +27,5 @@
 <script src="/adminlte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="/adminlte/plugins/fastclick/fastclick.js"></script>
+<script src="/plugins/layer/layer.js"></script>
 <script src="/js/admin.js"></script>

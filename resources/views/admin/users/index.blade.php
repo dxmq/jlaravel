@@ -31,8 +31,8 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->created_at->format('Y-m-d H:i:s') }}</td>
                                     <td>
-                                        <a type="button" class="btn" href="/admin/users/{{ $user->id }}" >修改</a>
-                                        <a type="button" class="btn" href="/admin/users/{{ $user->id }}/delete" >删除</a>
+                                        <a type="button" class="btn" href="/admin/users/{{ $user->id }}/edit" >修改</a>
+                                        <a type="button" class="btn" href="/admin/users/{{ $user->id }}/delete" onclick="return is_delete()">删除</a>
                                         <a type="button" class="btn" href="/admin/users/2/role" >角色管理</a>
                                     </td>
                                 </tr>
@@ -48,4 +48,8 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+@endsection
+
+@section('js')
+
 @endsection
