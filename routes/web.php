@@ -79,5 +79,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/permissions/store', '\App\Admin\Controllers\PermissionController@store');
         Route::post('/permissions/{permission}', '\App\Admin\Controllers\PermissionController@update');
         Route::get('/permissions/{permission}/destroy', '\App\Admin\Controllers\PermissionController@destroy');
+
+        // 文章
+        Route::get('/posts', '\App\Admin\Controllers\PostController@index');
+        Route::post('/posts/{post}/status','\App\Admin\Controllers\PostController@status');
     });
 });

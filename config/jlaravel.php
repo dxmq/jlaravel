@@ -7,4 +7,5 @@ return [
 
     // 后台相关
     'admin_users_per_page' => 5,
+    'admin_posts_per_page' => 5,
 ];
