@@ -83,5 +83,13 @@ Route::group(['prefix' => 'admin'], function () {
         // 文章
         Route::get('/posts', '\App\Admin\Controllers\PostController@index');
         Route::post('/posts/{post}/status','\App\Admin\Controllers\PostController@status');
+
+        // 角色
+        Route::get('/topics', '\App\Admin\Controllers\TopicController@index');
+        Route::get('/topics/create', '\App\Admin\Controllers\TopicController@create');
+        Route::get('/topics/{topic}/edit', '\App\Admin\Controllers\TopicController@edit');
+        Route::post('/topics/store', '\App\Admin\Controllers\TopicController@store');
+        Route::post('/topics/{topic}', '\App\Admin\Controllers\TopicController@update');
+        Route::get('/topics/{topic}/destroy', '\App\Admin\Controllers\TopicController@destroy');
     });
 });

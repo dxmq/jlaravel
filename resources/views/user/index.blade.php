@@ -24,7 +24,7 @@
                     @foreach ($posts as $post)
                     <div class="blog-post" style="margin-top: 30px">
                         <p class=""><a href="/user/{{ $post->user_id }}">{{ $post->user->name }}</a> {{ $post->created_at->diffForHumans() }}</p>
-                        <p class=""><a href="/posts/{{ $post->user_id }}" >{{ $post->title }}</a></p>
+                        <p class=""><a href="/posts/{{ $post->id }}/show" >{{ $post->title }}</a></p>
 
 
                         <p><p>{!! str_limit($post->content, 100, '...') !!}</p>
