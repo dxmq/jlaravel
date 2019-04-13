@@ -5,6 +5,7 @@ namespace App\Admin\Controllers;
 use App\Http\Requests\UserCreate;
 use App\Http\Requests\UserUpdate;
 use App\Models\AdminUser;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -12,7 +13,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = AdminUser::paginate(config('jlaravel.admin_users_per_page'));
+        $users = AdminUser::with('roles')->paginate(config('jlaravel.admin_users_per_page'));
         return view('admin.users.index', compact('users'));
     }
 
@@ -54,5 +55,35 @@ class UserController extends Controller
         $user = AdminUser::findOrFail($id);
         $user->delete();
         return back()->with('success', '删除成功');
+    }
+
+    public function role(AdminUser $user)
+    {
+        $roles = Role::all(); // 所有的角色
+        $myRoles = $user->roles;
+        return view('admin.users.role', compact('user', 'roles', 'myRoles'));
+    }
+
+    public function assignRole(AdminUser $user)
+    {
+        $this->validate(request(), [
+            'roles' => 'required|array'
+        ]);
+
+        $roles = Role::find(request('roles'));
+        $myRoles = $user->roles;
+
+        // 对已经有的角色
+        $addRoles = $roles->diff($myRoles);
+        foreach ($addRoles as $role) {
+            $user->roles()->save($role);
+        }
+
+        $deleteRoles = $myRoles->diff($roles);
+        foreach ($deleteRoles as $role) {
+            $user->deleteRole($role);
+        }
+
+        return redirect('admin/users')->with('success', '角色分配成功');
     }
 }

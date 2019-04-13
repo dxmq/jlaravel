@@ -13,13 +13,6 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::with('permissions')->get();
-        $permissionStr = '';
-        foreach ($roles as $role) {
-            foreach ($role->permissions as $permission) {
-                $permissionStr .= $permission->description . ',';
-            }
-        }
-
         return view('admin.roles.index', compact('roles'));
     }
 

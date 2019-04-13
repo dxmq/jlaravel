@@ -28,4 +28,15 @@ class AdminUser extends Authenticatable
         'password', 'remember_token',
     ];
 
+    // 当前用户的角色(多对多)
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'admin_role_users', 'user_id', 'role_id')->withPivot('user_id', 'role_id');
+    }
+
+    // 删除role和user的关联
+    public function deleteRole($role)
+    {
+        $this->roles()->detach($role);
+    }
 }

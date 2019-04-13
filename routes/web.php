@@ -59,6 +59,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/users/store', '\App\Admin\Controllers\UserController@store');
         Route::post('/users/{user}', '\App\Admin\Controllers\UserController@update');
         Route::get('/users/{user}/delete', '\App\Admin\Controllers\UserController@delete');
+        Route::get('/users/{user}/role', '\App\Admin\Controllers\UserController@role');
+        Route::post('/users/{user}/role', '\App\Admin\Controllers\UserController@assignRole'); // 给用户分配角色
 
         // 角色
         Route::get('/roles', '\App\Admin\Controllers\RoleController@index');
@@ -68,7 +70,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/roles/{role}', '\App\Admin\Controllers\RoleController@update');
         Route::get('/roles/{role}/destroy', '\App\Admin\Controllers\RoleController@destroy');
         Route::get('/roles/{role}/permission', '\App\Admin\Controllers\RoleController@permission');
-        Route::post('/roles/{role}/permission', '\App\Admin\Controllers\RoleController@assignPermission'); // 分配权限
+        Route::post('/roles/{role}/permission', '\App\Admin\Controllers\RoleController@assignPermission'); // 给角色分配权限
 
         // 权限
         Route::get('/permissions', '\App\Admin\Controllers\PermissionController@index');
