@@ -24,6 +24,7 @@
                                     <th style="width: 10px">#</th>
                                     <th>角色名称</th>
                                     <th>角色描述</th>
+                                    <th>权限</th>
                                     <th>创建时间</th>
                                     <th>操作</th>
                                 </tr>
@@ -32,11 +33,18 @@
                                     <td>{{ $role->id }}.</td>
                                     <td>{{ $role->name }}</td>
                                     <td>{{ $role->description }}</td>
+                                    <td>
+                                        <?php $str = '';?>
+                                        @foreach($role->permissions as $permission)
+                                            <?php $str .= $permission->description . ' / ' ?>
+                                        @endforeach
+                                            <?php echo rtrim($str, ' / '); ?>
+                                    </td>
                                     <td>{{ $role->created_at->format('Y-m-d H:i:s') }}</td>
                                     <td>
                                         <a type="button" class="btn" href="/admin/roles/{{ $role->id }}/edit" >修改</a>
                                         <a type="button" class="btn" href="/admin/roles/{{ $role->id }}/destroy" onclick="return is_delete()">删除</a>
-                                        <a type="button" class="btn" href="/admin/roles/1/permission" >权限管理</a>
+                                        <a type="button" class="btn" href="/admin/roles/{{ $role->id }}/permission" >分配权限</a>
                                     </td>
                                 </tr>
                                 @endforeach

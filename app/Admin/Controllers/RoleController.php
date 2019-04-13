@@ -4,17 +4,22 @@ namespace App\Admin\Controllers;
 
 use App\Http\Requests\RoleCreate;
 use App\Http\Requests\RoleUpdate;
-use App\Http\Requests\UserUpdate;
-use App\Models\AdminUser;
+use App\Models\Permission;
 use App\Models\Role;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class RoleController extends Controller
 {
     public function index()
     {
-        $roles = Role::get();
+        $roles = Role::with('permissions')->get();
+        $permissionStr = '';
+        foreach ($roles as $role) {
+            foreach ($role->permissions as $permission) {
+                $permissionStr .= $permission->description . ',';
+            }
+        }
+
         return view('admin.roles.index', compact('roles'));
     }
 
@@ -50,5 +55,35 @@ class RoleController extends Controller
         $role->delete();
 
         return redirect('admin/roles')->with('success', '删除成功');
+    }
+
+    public function permission(Role $role)
+    {
+        $permissions = Permission::all(); // 所有的权限
+        $rolePermissions = $role->permissions; // 当前角色的权限
+        return view('admin.roles.permission', compact('role','permissions', 'rolePermissions'));
+    }
+
+    public function assignPermission(Role $role)
+    {
+        $this->validate(request(), [
+            'permissions' => 'required|array'
+        ]);
+
+        $permissions = Permission::find(request('permissions'));
+        $myPermissions = $role->permissions; // 当前角色拥有的权限
+
+        // 对已经存在的权限
+        $addPermissions = $permissions->diff($myPermissions);
+        foreach ($addPermissions as $permission) {
+            $role->grantPermission($permission);
+        }
+
+        $deletePermission = $myPermissions->diff($permissions);
+        foreach ($deletePermission as $permission) {
+            $role->deletePermission($permission);
+        }
+
+        return redirect('admin/roles')->with('success', '分配权限成功');
     }
 }

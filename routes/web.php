@@ -67,6 +67,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/roles/store', '\App\Admin\Controllers\RoleController@store');
         Route::post('/roles/{role}', '\App\Admin\Controllers\RoleController@update');
         Route::get('/roles/{role}/destroy', '\App\Admin\Controllers\RoleController@destroy');
+        Route::get('/roles/{role}/permission', '\App\Admin\Controllers\RoleController@permission');
+        Route::post('/roles/{role}/permission', '\App\Admin\Controllers\RoleController@assignPermission'); // 分配权限
 
         // 权限
         Route::get('/permissions', '\App\Admin\Controllers\PermissionController@index');
