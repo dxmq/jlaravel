@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\Fan;
+use App\Models\Notice;
 use App\Models\Post;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -59,5 +60,23 @@ class User extends Authenticatable
     public function posts()
     {
         return $this->hasMany(Post::class, 'user_id', 'id');
+    }
+
+    // 收到的通知
+    public function notices() // 关联notice
+    {
+        return $this->belongsToMany(Notice::class, 'user_notices', 'user_id', 'notice_id')->withPivot('user_id', 'notice_id');
+    }
+
+    // 增加通知
+    public function addNotice($notice)
+    {
+        $this->notices()->save($notice);
+    }
+
+    // 减少通知
+    public function deleteNotice($notice)
+    {
+        return $this->notices()->detach($notice);
     }
 }

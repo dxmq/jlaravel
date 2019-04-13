@@ -31,9 +31,12 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::post('user/{user}/fan', 'UserController@fan');
     Route::post('user/{user}/unfan', 'UserController@unfan');
 
-    // 主题
+    // 专题
     Route::get('topic/{topic}', 'TopicController@index');
     Route::get('topic/{topic}/submit', 'TopicController@submit');
+
+    // 通知
+    Route::get('/notices', 'NoticeController@index');
 });
 
 
@@ -91,5 +94,13 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/topics/store', '\App\Admin\Controllers\TopicController@store');
         Route::post('/topics/{topic}', '\App\Admin\Controllers\TopicController@update');
         Route::get('/topics/{topic}/destroy', '\App\Admin\Controllers\TopicController@destroy');
+
+        // 通知
+        Route::get('/notices', '\App\Admin\Controllers\NoticeController@index');
+        Route::get('/notices/create', '\App\Admin\Controllers\NoticeController@create');
+        Route::get('/notices/{notice}/edit', '\App\Admin\Controllers\NoticeController@edit');
+        Route::post('/notices/store', '\App\Admin\Controllers\NoticeController@store');
+        Route::post('/notices/{notice}', '\App\Admin\Controllers\NoticeController@update');
+        Route::get('/notices/{notice}/destroy', '\App\Admin\Controllers\NoticeController@destroy');
     });
 });
