@@ -59,5 +59,13 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/users/store', '\App\Admin\Controllers\UserController@store');
         Route::post('/users/{user}', '\App\Admin\Controllers\UserController@update');
         Route::get('/users/{user}/delete', '\App\Admin\Controllers\UserController@delete');
+
+        // 角色
+        Route::get('/roles', '\App\Admin\Controllers\RoleController@index');
+        Route::get('/roles/create', '\App\Admin\Controllers\RoleController@create');
+        Route::get('/roles/{role}/edit', '\App\Admin\Controllers\RoleController@edit');
+        Route::post('/roles/store', '\App\Admin\Controllers\RoleController@store');
+        Route::post('/roles/{role}', '\App\Admin\Controllers\RoleController@update');
+        Route::get('/roles/{role}/destroy', '\App\Admin\Controllers\RoleController@destroy');
     });
 });

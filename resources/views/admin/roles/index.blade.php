@@ -1,10 +1,11 @@
 @extends('admin.layouts._base')
 
-@section('title', '用户管理')
+@section('title', '角色管理')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
+
         <!-- Main content -->
         <section class="content">
             <!-- Small boxes (Stat box) -->
@@ -13,39 +14,39 @@
                     @include('partials._success')
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">用户列表</h3>
+                            <h3 class="box-title">角色列表</h3>
                         </div>
-                        <a type="button" class="btn " href="/admin/users/create" >增加用户</a>
+                        <a type="button" class="btn " href="/admin/roles/create" >增加角色</a>
                         <!-- /.box-header -->
                         <div class="box-body">
                             <table class="table table-bordered">
                                 <tbody><tr>
                                     <th style="width: 10px">#</th>
-                                    <th>用户名称</th>
+                                    <th>角色名称</th>
+                                    <th>角色描述</th>
                                     <th>创建时间</th>
                                     <th>操作</th>
                                 </tr>
-                                @foreach ($users as $user)
+                                @foreach ($roles as $role)
                                 <tr>
-                                    <td>{{ $user->id }}.</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->created_at->format('Y-m-d H:i:s') }}</td>
+                                    <td>{{ $role->id }}.</td>
+                                    <td>{{ $role->name }}</td>
+                                    <td>{{ $role->description }}</td>
+                                    <td>{{ $role->created_at->format('Y-m-d H:i:s') }}</td>
                                     <td>
-                                        <a type="button" class="btn" href="/admin/users/{{ $user->id }}/edit" >修改</a>
-                                        <a type="button" class="btn" href="/admin/users/{{ $user->id }}/delete" onclick="return is_delete()">删除</a>
-                                        <a type="button" class="btn" href="/admin/users/2/role" >角色管理</a>
+                                        <a type="button" class="btn" href="/admin/roles/{{ $role->id }}/edit" >修改</a>
+                                        <a type="button" class="btn" href="/admin/roles/{{ $role->id }}/destroy" onclick="return is_delete()">删除</a>
+                                        <a type="button" class="btn" href="/admin/roles/1/permission" >权限管理</a>
                                     </td>
                                 </tr>
                                 @endforeach
-                                </tbody>
-                            </table>
-                            {{ $users->links() }}
+                                </tbody></table>
                         </div>
+
                     </div>
                 </div>
             </div>
         </section>
         <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
 @endsection
