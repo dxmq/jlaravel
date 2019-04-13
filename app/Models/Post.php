@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Post extends Model
 {
@@ -37,5 +38,17 @@ class Post extends Model
     public function postTopics()
     {
         return $this->hasMany(PostTopic::class, 'post_id');
+    }
+
+    public function scopeTopicNotBy(Builder $query, $topic_id)
+    {
+        return $query->doesntHave('postTopics', 'and', function($q) use ($topic_id) {
+            $q->where("topic_id", $topic_id);
+        });
+    }
+
+    public function scopeAuthorBy($query, $user_id)
+    {
+        return $query->where('user_id', $user_id);
     }
 }

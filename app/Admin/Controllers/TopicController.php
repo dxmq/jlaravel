@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Topic;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -53,4 +54,5 @@ class TopicController extends Controller
 
         return redirect('admin/topics')->with('success', '删除成功');
     }
+
 }
