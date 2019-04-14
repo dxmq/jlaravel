@@ -13,6 +13,7 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::with('permissions')->get();
+
         return view('admin.roles.index', compact('roles'));
     }
 
@@ -24,6 +25,7 @@ class RoleController extends Controller
     public function store(RoleCreate $request)
     {
         Role::create($request->postFillData());
+
         return redirect('admin/roles')->with('success', '增加成功');
     }
 
@@ -54,14 +56,18 @@ class RoleController extends Controller
     {
         $permissions = Permission::all(); // 所有的权限
         $rolePermissions = $role->permissions; // 当前角色的权限
-        return view('admin.roles.permission', compact('role','permissions', 'rolePermissions'));
+
+        return view('admin.roles.permission', compact('role', 'permissions', 'rolePermissions'));
     }
 
     public function assignPermission(Role $role)
     {
-        $this->validate(request(), [
-            'permissions' => 'required|array'
-        ]);
+        $this->validate(
+            request(),
+            [
+                'permissions' => 'required|array',
+            ]
+        );
 
         $permissions = Permission::find(request('permissions'));
         $myPermissions = $role->permissions; // 当前角色拥有的权限

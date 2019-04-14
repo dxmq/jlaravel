@@ -3,7 +3,6 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Topic;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -12,6 +11,7 @@ class TopicController extends Controller
     public function index()
     {
         $topics = Topic::get();
+
         return view('admin.topics.index', compact('topics'));
     }
 
@@ -23,7 +23,7 @@ class TopicController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:50|unique:topics,name'
+            'name' => 'required|max:50|unique:topics,name',
         ]);
         Topic::create($request->only('name'));
 
@@ -38,7 +38,7 @@ class TopicController extends Controller
     public function update($id)
     {
         $this->validate(request(), [
-            'name' => 'required|max:50|unique:topics,name,' . $id,
+            'name' => 'required|max:50|unique:topics,name,'.$id,
         ]);
         $topic = Topic::findOrFail($id);
         $topic->name = request('name');

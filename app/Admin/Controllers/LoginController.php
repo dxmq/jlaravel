@@ -21,6 +21,7 @@ class LoginController extends Controller
         if (true == Auth::guard('admin')->attempt($user)) {
             return redirect($this->redirectTo);
         }
+
         return back()->withErrors('用户名或密码错误');
     }
 }

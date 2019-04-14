@@ -12,6 +12,7 @@ class PermissionController extends Controller
     public function index()
     {
         $permissions = Permission::get();
+
         return view('admin.permissions.index', compact('permissions'));
     }
 
@@ -23,6 +24,7 @@ class PermissionController extends Controller
     public function store(PermissionCreate $request)
     {
         Permission::create($request->postFillData());
+
         return redirect('admin/permissions')->with('success', '添加成功');
     }
 

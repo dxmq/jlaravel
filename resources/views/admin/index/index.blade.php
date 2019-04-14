@@ -73,7 +73,7 @@
                                             <div class="timeline-item">
                                                 <div class="row">
                                                     <div class="col-xs-3 date">
-                                                        <i class="fa fa-file-code-o"></i> 12:00
+                                                        <i class="fa fa-briefcase"></i> 12:00
                                                         <br>
                                                         <small class="text-navy">2019-4-08</small>
                                                     </div>
@@ -83,9 +83,19 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-xs-3 date">
-                                                        <i class="fa fa-file-code-o"></i> 6:00
+                                                        <i class="fa fa-briefcase"></i> 22:00
                                                         <br>
                                                         <small class="text-navy">2019-4-10</small>
+                                                    </div>
+                                                    <div class="col-xs-7 content no-top-border">
+                                                        <p class="m-b-xs"><strong>RBAC权限管理</strong></p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-3 date">
+                                                        <i class="fa fa-briefcase"></i> 6:00
+                                                        <br>
+                                                        <small class="text-navy">2019-4-12</small>
                                                     </div>
                                                     <div class="col-xs-7 content no-top-border">
                                                         <p class="m-b-xs"><strong>后台修复bug</strong></p>
@@ -93,7 +103,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-xs-3 date">
-                                                        <i class="fa fa-file-code-o"></i> 12:00
+                                                        <i class="fa fa-briefcase"></i> 12:00
                                                         <br>
                                                         <small class="text-navy">2019-04-14</small>
                                                     </div>

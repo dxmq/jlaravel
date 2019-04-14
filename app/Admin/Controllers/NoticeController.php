@@ -12,6 +12,7 @@ class NoticeController extends Controller
     public function index()
     {
         $notices = Notice::all();
+
         return view('admin.notices.index', compact('notices'));
     }
 

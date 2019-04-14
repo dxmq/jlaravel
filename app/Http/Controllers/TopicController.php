@@ -12,17 +12,20 @@ class TopicController extends Controller
 {
     public function index(Topic $topic)
     {
-        $posts = $topic->posts()->orderBy('created_at', 'desc')->with(['user'])->take(config('jlaravel.topic_posts_per_page'))->get(); // 该专题下所有文章
+        $posts = $topic->posts()->orderBy('created_at',
+            'desc')->with(['user'])->take(config('jlaravel.topic_posts_per_page'))->get(); // 该专题下所有文章
 
-        $myposts = Post::authorBy(Auth::id())->topicNotBy($topic->id)->where('status', '<>', -1)->get(); // 这个用户写的并且没有被专题收录的并且没有被禁止的
-        return view('topics.index', compact('topic','posts', 'myposts'));
+        $myposts = Post::authorBy(Auth::id())->topicNotBy($topic->id)->where('status', '<>',
+            -1)->get(); // 这个用户写的并且没有被专题收录的并且没有被禁止的
+
+        return view('topics.index', compact('topic', 'posts', 'myposts'));
     }
 
     // 投稿
     public function submit(Topic $topic)
     {
         $this->validate(request(), [
-            'post_ids' => 'array'
+            'post_ids' => 'array',
         ]);
 
         $post_ids = request('post_ids');

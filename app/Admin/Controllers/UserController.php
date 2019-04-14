@@ -14,6 +14,7 @@ class UserController extends Controller
     public function index()
     {
         $users = AdminUser::with('roles')->paginate(config('jlaravel.admin_users_per_page'));
+
         return view('admin.users.index', compact('users'));
     }
 
@@ -25,6 +26,7 @@ class UserController extends Controller
     public function store(UserCreate $request)
     {
         AdminUser::create($request->postFillData());
+
         return redirect('admin/users')->with('success', '增加成功');
     }
 
@@ -40,6 +42,7 @@ class UserController extends Controller
             $validator = $request->validate($userUpdate->returnNoPassword());
             $user->name = $validator['name'];
             $user->save();
+
             return redirect('admin/users')->with('success', '修改成功');
         }
         $validator = $request->validate($userUpdate->returnAll());
@@ -54,6 +57,7 @@ class UserController extends Controller
     {
         $user = AdminUser::findOrFail($id);
         $user->delete();
+
         return back()->with('success', '删除成功');
     }
 
@@ -61,13 +65,14 @@ class UserController extends Controller
     {
         $roles = Role::all(); // 所有的角色
         $myRoles = $user->roles;
+
         return view('admin.users.role', compact('user', 'roles', 'myRoles'));
     }
 
     public function assignRole(AdminUser $user)
     {
         $this->validate(request(), [
-            'roles' => 'required|array'
+            'roles' => 'required|array',
         ]);
 
         $roles = Role::find(request('roles'));

@@ -32,7 +32,8 @@ class Post extends Model
 
     public function topics()
     {
-        return $this->belongsToMany(Topic::class, 'post_topics', 'post_id', 'topic_id')->withPivot('topic_id', 'post_id');
+        return $this->belongsToMany(Topic::class, 'post_topics', 'post_id', 'topic_id')->withPivot('topic_id',
+            'post_id');
     }
 
     public function postTopics()
@@ -42,7 +43,7 @@ class Post extends Model
 
     public function scopeTopicNotBy(Builder $query, $topic_id)
     {
-        return $query->doesntHave('postTopics', 'and', function($q) use ($topic_id) {
+        return $query->doesntHave('postTopics', 'and', function ($q) use ($topic_id) {
             $q->where("topic_id", $topic_id);
         });
     }

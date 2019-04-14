@@ -12,6 +12,7 @@ class Permission extends Model
     // 当前权限下的角色
     public function roles()
     {
-        return $this->belongsToMany(Role::class, 'admin_role_permissions', 'permission_id', 'role_id')->withPivot('role_id', 'permission_id');
+        return $this->belongsToMany(Role::class, 'admin_role_permissions', 'permission_id',
+            'role_id')->withPivot('role_id', 'permission_id');
     }
 }

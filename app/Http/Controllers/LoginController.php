@@ -11,7 +11,7 @@ class LoginController extends Controller
 
     public function index()
     {
-        if(Auth::check()) {
+        if (Auth::check()) {
             return redirect($this->redirectTo);
         }
 
@@ -32,6 +32,7 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
+
         return redirect('/login');
     }
 }

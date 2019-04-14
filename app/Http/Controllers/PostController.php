@@ -17,6 +17,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::with(['user', 'comments', 'zans'])->findOrFail($id);
+
         return view('posts.show', compact('post'));
     }
 
@@ -35,6 +36,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $this->authorize('update', $post);
+
         return view('posts.edit', compact('post'));
     }
 
@@ -43,7 +45,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
 
-        $this->authorize('update',$post);
+        $this->authorize('update', $post);
 
         $post->fill($post_up->postFillData());
         $post->save();
@@ -58,6 +60,7 @@ class PostController extends Controller
         $this->authorize('delete', $post);
 
         $post->delete();
+
         return redirect('/');
     }
 
@@ -70,6 +73,7 @@ class PostController extends Controller
     public function comment(CommentCreate $commentCreate)
     {
         Comment::create($commentCreate->postFillData());
+
         return back()->with('success', '评论成功');
     }
 
@@ -78,12 +82,14 @@ class PostController extends Controller
         $zan = new Zan();
         $zan->user_id = Auth::id();
         $post->zans()->save($zan);
+
         return back();
     }
 
     public function unzan(Post $post)
     {
         $post->zan(Auth::id())->delete();
+
         return back();
     }
 }
