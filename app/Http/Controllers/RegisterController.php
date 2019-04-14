@@ -20,7 +20,6 @@ class RegisterController extends Controller
             'name' => $register->get('name'),
             'email' => $register->get('email'),
             'password' => bcrypt($register->get('password')),
-            'avatar' => '/image/user.jpg',
         ];
 
         User::create($data);

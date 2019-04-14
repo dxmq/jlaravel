@@ -14,7 +14,7 @@ class AlterUsersTableAdd extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('avatar', 100);
+            $table->string('avatar', 100)->default('/image/user.jpg');
         });
     }
 
@@ -25,7 +25,7 @@ class AlterUsersTableAdd extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('avatar');
         });
     }
