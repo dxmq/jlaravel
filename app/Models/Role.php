@@ -30,4 +30,9 @@ class Role extends Model
         return $this->permissions()->detach($permission);
     }
 
+    // 判断角色是否有当前权限
+    public function hasPermission($permission)
+    {
+        return $this->permissions->contains($permission);
+    }
 }

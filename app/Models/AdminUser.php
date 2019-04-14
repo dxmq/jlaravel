@@ -39,4 +39,16 @@ class AdminUser extends Authenticatable
     {
         $this->roles()->detach($role);
     }
+
+    // 是否有某个角色
+    public function isInRoles($role)
+    {
+        return !!$role->intersect($this->roles)->count();
+    }
+
+    // 是否有权限
+    public function hasPermission($permission)
+    {
+        return $this->isInRoles($permission->roles);
+    }
 }

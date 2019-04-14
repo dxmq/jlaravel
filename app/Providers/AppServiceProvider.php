@@ -16,7 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if (request()->is('admin/*')) {
+            config(['auth.defaults.guard' => 'admin']);
+        }
     }
 
     /**

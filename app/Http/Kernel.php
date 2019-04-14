@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AuthenticateAdmin;
 use App\Http\Middleware\CheckAdminLogin;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -42,6 +43,7 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
+
     ];
 
     /**
@@ -63,6 +65,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
         'admin' => CheckAdminLogin::class, // 后台检查是否登录
+
     ];
 
     /**
