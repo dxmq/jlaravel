@@ -30,6 +30,8 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::get('/user/{user}', 'UserController@index');
     Route::post('user/{user}/fan', 'UserController@fan');
     Route::post('user/{user}/unfan', 'UserController@unfan');
+    Route::get('user/me/setting', 'UserController@setting');
+    Route::post('user/me/setting', 'UserController@settingStore');
 
     // 专题
     Route::get('topic/{topic}', 'TopicController@index');

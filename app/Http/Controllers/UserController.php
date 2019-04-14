@@ -41,4 +41,33 @@ class UserController extends Controller
             'message' => ''
         ];
     }
+
+    public function setting()
+    {
+        $user = Auth::user();
+        return view('user.setting', compact('user'));
+    }
+
+    public function settingStore(Request $request)
+    {
+        $this->validate(request(),[
+            'name' => 'min:3',
+        ]);
+
+        $name = request('name');
+        $user = Auth::user();
+        if ($name != $user->name) {
+            if(\App\User::where('name', $name)->count() > 0) {
+                return back()->withErrors('用户名已经被占用！');
+            }
+            $user->name = request('name');
+        }
+        if ($request->file('avatar')) {
+            $path = $request->file('avatar')->storePublicly(md5(Auth::id() . time()));
+            $user->avatar = "/storage/". $path;
+        }
+
+        $user->save();
+        return back()->with('success', '设置成功');
+    }
 }
