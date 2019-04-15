@@ -54,19 +54,19 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/login', '\App\Admin\Controllers\LoginController@login');
 
     Route::group(['middleware' => 'admin'], function () {
-        Route::get('/index', '\App\Admin\Controllers\IndexController@index')->name('admin.index');
-        Route::get('/logout', '\App\Admin\Controllers\IndexController@logout')->name('admin.logout');
+        Route::get('/index', '\App\Admin\Controllers\IndexController@index');
+        Route::get('/logout', '\App\Admin\Controllers\IndexController@logout');
 
         Route::group(['middleware' => 'can:system'], function () {
             // 用户相关
-            Route::get('/users', '\App\Admin\Controllers\UserController@index')->name('admin.users.index');
-            Route::get('/users/create', '\App\Admin\Controllers\UserController@create')->name('admin.users.create');
-            Route::get('/users/{user}/edit', '\App\Admin\Controllers\UserController@edit')->name('admin.users.edit');
-            Route::post('/users/store', '\App\Admin\Controllers\UserController@store')->name('admin.users.store');
-            Route::post('/users/{user}', '\App\Admin\Controllers\UserController@update')->name('admin.users.update');
-            Route::get('/users/{user}/delete', '\App\Admin\Controllers\UserController@delete')->name('admin.users.delete');
-            Route::get('/users/{user}/role', '\App\Admin\Controllers\UserController@role')->name('admin.users.role');
-            Route::post('/users/{user}/role', '\App\Admin\Controllers\UserController@assignRole')->name('admin.users.assign');// 给用户分配角色
+            Route::get('/users', '\App\Admin\Controllers\UserController@index');
+            Route::get('/users/create', '\App\Admin\Controllers\UserController@create');
+            Route::get('/users/{user}/edit', '\App\Admin\Controllers\UserController@edit');
+            Route::post('/users/store', '\App\Admin\Controllers\UserController@store');
+            Route::post('/users/{user}', '\App\Admin\Controllers\UserController@update');
+            Route::get('/users/{user}/delete', '\App\Admin\Controllers\UserController@delete');
+            Route::get('/users/{user}/role', '\App\Admin\Controllers\UserController@role');
+            Route::post('/users/{user}/role', '\App\Admin\Controllers\UserController@assignRole');// 给用户分配角色
 
             // 角色
             Route::get('/roles', '\App\Admin\Controllers\RoleController@index');

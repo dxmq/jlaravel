@@ -15,15 +15,15 @@
             <div class="carousel-inner">
                 <div class="item active">
                     <img src="http://ww1.sinaimg.cn/large/44287191gw1excbq6tb3rj21400migrz.jpg" alt="..." />
-                    <div class="carousel-caption">...</div>
+                    <div class="carousel-caption"></div>
                 </div>
                 <div class="item">
                     <img src="http://ww3.sinaimg.cn/large/44287191gw1excbq5iwm6j21400min3o.jpg" alt="..." />
-                    <div class="carousel-caption">...</div>
+                    <div class="carousel-caption"></div>
                 </div>
                 <div class="item">
                     <img src="http://ww2.sinaimg.cn/large/44287191gw1excbq4kx57j21400migs4.jpg" alt="..." />
-                    <div class="carousel-caption">...</div>
+                    <div class="carousel-caption"></div>
                 </div>
             </div>
             <!-- Controls -->
