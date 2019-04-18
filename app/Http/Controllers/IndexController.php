@@ -11,7 +11,7 @@ class IndexController extends Controller
     public function index()
     {
         $per_page = config('jlaravel.posts_per_page');
-        $posts = Post::where('status', '<>', -1)->orderBy('created_at', 'desc')->with('user')->withCount([
+        $posts = Post::where('status', '<>', -1)->orderBy('created_at', 'desc')->with(['user', 'topics'])->withCount([
             'comments',
             'zans',
         ])->paginate($per_page);

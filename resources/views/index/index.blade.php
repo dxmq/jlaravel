@@ -38,7 +38,7 @@
         @foreach ($posts as $post)
         <div class="blog-post">
             <h3 class="blog-post-title"><a href="/posts/{{$post->id}}/show" >{{ $post->title }}</a></h3>
-            <p class="blog-post-meta">@isset($post->created_at){{ $post->created_at->toFormattedDateString() }} by @endisset<a href="/user/{{ $post->user_id }}">{{ $post->user->name }}</a></p>
+        <p class="blog-post-meta">@isset($post->created_at){{ $post->created_at->toFormattedDateString() }} by @endisset<a href="/user/{{ $post->user_id }}">{{ $post->user->name }}</a>@if(count($post->topics)!= 0) | @foreach ($post->topics as $topic) <a href="/topic/{{ $topic->id }}"><span style="font-size: 13px;">{{ $topic->name }}</span></a> @endforeach @endif</p>
 
             <p>@if(preg_match('/^.*\.(png|jpg|jpeg|gif).*$/i', $post->content)){!! str_replace('<img src=', 'image address ', str_limit($post->content, 150, '...')) !!}@else{!! str_limit($post->content, 150, '...')  !!}@endif</p>
             <p class="blog-post-meta">赞 {{ $post->zans_count }}  | 评论 {{ $post->comments_count }}</p>
