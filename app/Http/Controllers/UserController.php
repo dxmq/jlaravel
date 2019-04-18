@@ -11,7 +11,8 @@ class UserController extends Controller
 {
     public function index(User $user)
     {
-        $posts = $user->posts()->orderBy('created_at', 'desc')->take(config('jlaravel.user_post_per_page'))->get();
+        $posts = $user->posts()->orderBy('created_at',
+            'desc')->with('user')->take(config('jlaravel.user_post_per_page'))->get();
         $user = User::withCount(['stars', 'fans', 'posts'])->find($user->id);
         $fans = $user->fans()->with('fuser')->get();
         $stars = $user->stars()->with('suser')->get();
