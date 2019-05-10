@@ -6,6 +6,7 @@ use App\Models\Fan;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -75,5 +76,36 @@ class UserController extends Controller
         $user->save();
 
         return back()->with('success', '设置成功');
+    }
+
+    public function emailVerificationRequired(){
+        return view('user.edit_email_notify');
+    }
+
+    public function sendVerificationMail(){
+        $user= Auth::user();
+        $this->sendEmailConfirmationTo($user);
+        return redirect('/')->with('success', '验证邮件已发送到您的注册邮箱上，请注意查收。');
+    }
+
+    protected function sendEmailConfirmationTo($user)
+    {
+        $view = 'emails.email_verification';
+        $data = compact('user');
+        $to = $user->email;
+        $subject = '感谢注册' . config('app.name') . '，请验证邮箱';
+
+        Mail::send($view, $data, function ($message) use ($to, $subject) {
+            $message->to($to)->subject($subject);
+        });
+    }
+
+    public function verifiedEmail($token){
+        $user = User::where('verification_token',$token)->first();
+        $user->verified = true;
+        $user->verification_token = null;
+        $user->save();
+        Auth::login($user);
+        return redirect('/')->with('success', '恭喜您，邮箱验证成功！');
     }
 }

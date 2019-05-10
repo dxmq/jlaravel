@@ -29,7 +29,11 @@
                         </label>
                     </div>
                     @endforeach
+                    @if ($myposts->count() != 0)
                     <button type="submit" class="btn btn-default">投稿</button>
+                    @else
+                        暂无文章
+                    @endif
                 </form>
             </div>
         </div>

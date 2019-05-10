@@ -48,6 +48,13 @@ Route::get('/logout', 'LoginController@logout');
 Route::get('/register', 'RegisterController@index');
 Route::post('/register', 'RegisterController@register');
 
+// 邮箱验证
+Route::get('/email_verification_required', 'UserController@emailVerificationRequired')->name('email-verification-required');
+Route::post('/users/send_verification_mail', 'UserController@sendVerificationMail')->name('user.send-verification-mail');
+Route::get('/email_verification/{token}', 'UserController@verifiedEmail')->name('verified_email');
+
+
+
 // 后台
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/login', '\App\Admin\Controllers\LoginController@index')->name('admin.login');

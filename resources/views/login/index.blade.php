@@ -21,6 +21,7 @@
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
         <a href="/register" class="btn btn-lg btn-primary btn-block" type="submit">去注册>></a>
+        <a href="/" class="btn btn-lg btn-primary btn-block" type="button">回首页>></a>
     </form>
 
 </div> <!-- /container -->

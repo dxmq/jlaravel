@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Topic;
+use App\Observers\UserObserver;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -29,6 +30,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        \App\User::observe(UserObserver::class);
 
         View::composer('layouts._sidebar', function($view) {
             $topics = Topic::withCount('posts')->get();
