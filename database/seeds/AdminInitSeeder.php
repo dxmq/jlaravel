@@ -77,7 +77,7 @@ class AdminInitSeeder extends Seeder
                 'updated_at' => date('Y-m-d H:i:s', time())
             ],
         ];
-        DB::table('admin_permission')->insert($permissionData);
+        DB::table('admin_permissions')->insert($permissionData);
 
         // ############
         $roleUserData = [

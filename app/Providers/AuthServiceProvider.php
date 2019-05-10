@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Post;
 use App\Policies\PostPolicy;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -31,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
         if (class_exists(\App\Models\Permission::class)) {
             $permissions = \App\Models\Permission::with('roles')->get();
             foreach ($permissions as $permission) {
-                Gate::define($permission->name, function($user) use($permission) {
+                Gate::define($permission->name, function ($user) use ($permission) {
                     return $user->hasPermission($permission);
                 });
             }

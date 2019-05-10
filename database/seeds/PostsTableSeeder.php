@@ -13,11 +13,6 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('posts')->insert([
-            'title' => 'jlaravel自由文章创作',
-            'content' => 'welcome, jlaravel, 简单, 优雅！',
-            'created_at' => date('Y-m-d H:i:s', time()),
-            'updated_at' => date('Y-m-d H:i:s', time()),
-        ]);
+        factory(\App\Models\Post::class, 10)->create();
     }
 }
