@@ -1,4 +1,4 @@
-### jlaravel自由写作分享平台。基于laravel5.8构建。
+### jlaravel访简书。基于laravel5.8构建。
 
 ### 安装
 
