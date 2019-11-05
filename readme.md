@@ -1,4 +1,4 @@
-### jlaravel访简书。基于laravel5.8构建。
+### jlaravel仿简书。基于laravel5.8构建。
 
 ### 安装
 
